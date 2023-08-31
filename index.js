@@ -1,5 +1,8 @@
 import express from 'express'
+import cors from 'cors'
 const app = express();
+
+app.use(cors())
 
 // 
 import { fileURLToPath } from 'url';
@@ -45,8 +48,8 @@ const isUserStreaming = async(sender) => {
   }
 }
 
-// /stream-gated/0x2Ae018789D7f82FedfbfE221C1A8eD58E99511E8/0x6eba7Bd536557de0D0038905d7C0a4E0dCdd7ab1/fDAIx/stream.png
-// /stream-gated/0x2Ae018789D7f82FedfbfE221C1A8eD58E99511E8/0x6eba7Bd536557de0D0038905d7C0a4E0dCdd7ab1/ETHx/stream.png
+// /stream-gated/0x2Ae018789D7f82FedfbfE221C1A8eD58E99511E8/stream.png
+// /stream-gated/0xe59c26b03b3609183aEcE9035cB7af9a202dcE60/stream.png
 
 // Define a route for the stream-gated endpoint
 app.get('/stream-gated/:sender/stream.png', async(req, res) => {
