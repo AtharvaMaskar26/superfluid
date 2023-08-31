@@ -48,6 +48,9 @@ const isUserStreaming = async(sender) => {
 // /stream-gated/0x2Ae018789D7f82FedfbfE221C1A8eD58E99511E8/0x6eba7Bd536557de0D0038905d7C0a4E0dCdd7ab1/fDAIx/stream.png
 // /stream-gated/0x2Ae018789D7f82FedfbfE221C1A8eD58E99511E8/0x6eba7Bd536557de0D0038905d7C0a4E0dCdd7ab1/ETHx/stream.png
 
+    // Set the response based on streaming status
+    res.set('Content-Type', 'image/png');
+
 // Define a route for the stream-gated endpoint
 app.get('/stream-gated/:sender/stream.png', async(req, res) => {
     const { sender} = req.params;
@@ -57,16 +60,12 @@ app.get('/stream-gated/:sender/stream.png', async(req, res) => {
     console.log(userIsStreaming);
 
 
-    // Set the appropriate response based on streaming status
-    if (userIsStreaming) {
-        // Return a transparent image (or no content)
-        // res.status(200).sendFile('transparent.JPG', { root: __dirname });
-        res.status(200).send({ isStreaming: true });
+    if (isStreaming) {
+        // Return an image with full transparency (transparent pixel)
+        res.send(Buffer.from('89504e470d0a1a0a0000000d49484452000000010000000108060000006a');
     } else {
-        // Return an opaque image
-        res.status(403).send({ isStreaming: false }); 
-        // console.log(`User is not streaming to ${currency}`); 
-        // res.send("Not Streaming")
+        // Return an image with full opacity (solid color)
+        res.send(Buffer.from('89504e470d0a1a0a0000000d4948445200000001000000010802000000d9'));
     }
 });
 
