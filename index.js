@@ -59,13 +59,16 @@ app.get('/stream-gated/:sender/stream.png', async(req, res) => {
     const userIsStreaming = await isUserStreaming(sender);
     console.log(userIsStreaming);
 
-
+    // Set the appropriate response based on streaming status
     if (userIsStreaming) {
-        // Return an image with full transparency (transparent pixel)
-        res.send(Buffer.from('89504e470d0a1a0a0000000d49484452000000010000000108060000006a');
+        // Return a transparent image (or no content)
+        // res.status(200).sendFile('transparent.JPG', { root: __dirname });
+        res.status(200).send({ isStreaming: true });
     } else {
-        // Return an image with full opacity (solid color)
-        res.send(Buffer.from('89504e470d0a1a0a0000000d4948445200000001000000010802000000d9'));
+        // Return an opaque image
+        res.status(403).send({ isStreaming: false }); 
+        // console.log(`User is not streaming to ${currency}`); 
+        // res.send("Not Streaming")
     }
 });
 
