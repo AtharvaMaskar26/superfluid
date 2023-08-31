@@ -60,7 +60,7 @@ app.get('/stream-gated/:sender/stream.png', async(req, res) => {
     console.log(userIsStreaming);
 
 
-    if (isStreaming) {
+    if (userIsStreaming) {
         // Return an image with full transparency (transparent pixel)
         res.send(Buffer.from('89504e470d0a1a0a0000000d49484452000000010000000108060000006a');
     } else {
