@@ -48,9 +48,6 @@ const isUserStreaming = async(sender) => {
 // /stream-gated/0x2Ae018789D7f82FedfbfE221C1A8eD58E99511E8/0x6eba7Bd536557de0D0038905d7C0a4E0dCdd7ab1/fDAIx/stream.png
 // /stream-gated/0x2Ae018789D7f82FedfbfE221C1A8eD58E99511E8/0x6eba7Bd536557de0D0038905d7C0a4E0dCdd7ab1/ETHx/stream.png
 
-    // Set the response based on streaming status
-    res.set('Content-Type', 'image/png');
-
 // Define a route for the stream-gated endpoint
 app.get('/stream-gated/:sender/stream.png', async(req, res) => {
     const { sender} = req.params;
@@ -58,6 +55,7 @@ app.get('/stream-gated/:sender/stream.png', async(req, res) => {
     // Check if the user is streaming
     const userIsStreaming = await isUserStreaming(sender);
     console.log(userIsStreaming);
+
 
     // Set the appropriate response based on streaming status
     if (userIsStreaming) {
