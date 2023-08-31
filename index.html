@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="">
+        <form action="" id="form">
+            <label for="sender-address">Enter Your Address</label>
+            <input type="text" id="sender-address">
+            <button>Submit</button>
+        </form>
+        <div class="hidden-content" id="blog-container">
+            <h1>Blog Heading</h1>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquid velit nostrum id distinctio voluptatum quam nam laboriosam sapiente nihil est nisi vel dolores ipsam labore necessitatibus aut, ipsum repellendus iusto.</p>
+        </div>
+
+        <script type="module">
+            const form = document.getElementById("form");
+const blogContainer = document.getElementById("blog-container");
+
+form.addEventListener('submit', async(event) => {
+    // Prevents the form from auto submitting 
+    event.preventDefault();
+
+    let senderAddress = document.getElementById('sender-address').value;
+
+    console.log(senderAddress);
+
+    const isStreaming = await fetch(`http://localhost:3000/stream-gated/${senderAddress}/stream.png`);
+    console.log(isStreaming.status);
+
+    if(isStreaming.status === 200) {
+        blogContainer.className = "visible-content";
+
+    } else {
+        alert("You are not streaming!");
+    }
+})
+
+        </script>
+    </div>
+</body>
+</html>

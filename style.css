@@ -1,0 +1,7 @@
+.hidden-content {
+    visibility: hidden;
+}
+
+.visible-content {
+    visibility: visible;
+}
